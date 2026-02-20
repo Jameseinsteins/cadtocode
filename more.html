@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>More</title>
+
+<link rel="manifest" href="manifest.json">
+
+<link rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" />
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="more-app">
+
+  <h2>Menu</h2>
+
+  <button class="menu-item" onclick="testAlert()">
+    <span class="material-symbols-rounded">campaign</span>
+    Send Test Alert
+  </button>
+
+  <button class="menu-item" onclick="clearFeed()">
+    <span class="material-symbols-rounded">delete</span>
+    Clear Feed
+  </button>
+  <button class="menu-item" onclick="resetAllData()">
+    <span class="material-symbols-rounded">refresh</span>
+    Reset Sample Data
+  </button>
+
+
+  <nav class="bottom-nav">
+    <a href="index.html">
+      <button>
+        <span class="material-symbols-rounded">location_on</span>
+        <small>Map</small>
+      </button>
+    </a>
+
+    <a href="feed.html">
+      <button>
+        <span class="material-symbols-rounded">dynamic_feed</span>
+        <small>Feed</small>
+      </button>
+    </a>
+
+    <a href="more.html">
+      <button class="active">
+        <span class="material-symbols-rounded">more_horiz</span>
+        <small>More</small>
+      </button>
+    </a>
+  </nav>
+
+</div>
+
+<script src="more.js"></script>
+</body>
+</html>

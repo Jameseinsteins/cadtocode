@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TANAW Map</title>
+
+<link rel="manifest" href="manifest.json">
+
+<link rel="stylesheet" 
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" />
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="ui-fixes.css">
+</head>
+
+<body>
+<div class="app">
+
+  <!-- SEARCH BAR -->
+  <div class="search-bar">
+     <span class="material-symbols-rounded">search</span>
+     <input id="searchInput" placeholder="Search">
+  </div>
+  
+         <!-- DRRM TOGGLE -->
+  
+  <div class="drrm-top">
+  <span>DRRM</span>
+  <label class="switch">
+    <input type="checkbox" id="drrmToggle">
+    <span class="slider"></span>
+  </label>
+</div>
+
+
+  <!-- MAP -->
+  <div id="map"></div>
+
+  <!-- FLOATING BUTTONS -->
+  <button class="fab gps" id="gpsBtn">
+    <span class="material-symbols-rounded">my_location</span>
+  </button>
+
+  <button class="fab add" id="addBtn">
+    <span class="material-symbols-rounded">add</span>
+  </button>
+ 
+  <!-- BOTTOM SHEET -->
+  <div class="sheet collapsed" id="bottomSheet">
+
+    <div class="handle" id="sheetHandle"></div>
+
+    <div class="sheet-tabs">
+      <button class="pill active" id="tripsTab">Trips</button>
+      <button class="pill" id="incidentsTab">Incidents</button>
+    </div>
+
+    <div class="sheet-body">
+
+
+      <!-- TRIPS INTRO -->
+      <div class="sheet-section active" id="tripsIntro">
+        <p class="trip-info">
+          Trips are a way of seeing incidents you may encounter
+          along a route between two points.
+        </p>
+        <button class="create-trip-btn" id="createTripBtn">
+          Create Trip
+        </button>
+      </div>
+
+      <!-- CREATE TRIP FORM -->
+      <div class="sheet-section" id="tripForm">
+        <div class="location-row">
+          <span class="dot start"></span>
+          <input placeholder="Choose Location">
+        </div>
+
+        <div class="location-row">
+          <span class="dot end"></span>
+          <input placeholder="Choose Location">
+        </div>
+
+        <button class="save-trip-btn">Save</button>
+      </div>
+
+      <!-- INCIDENTS -->
+      <div class="sheet-section" id="incidentsContent">
+        <div class="incident-search-row">
+          <input placeholder="Search Location">
+          <button class="filter-btn" id="filterBtn">
+            <span class="material-symbols-rounded">filter_alt</span>
+          </button>
+        </div>
+
+       <div class="filter-panel" id="filterPanel">
+
+  <label class="filter-item">
+    <span>Crash</span>
+    <input type="checkbox" checked onchange="toggleType('Crash', this.checked)">
+  </label>
+
+  <label class="filter-item">
+    <span>Flood</span>
+    <input type="checkbox" checked onchange="toggleType('Flood', this.checked)">
+  </label>
+
+  <label class="filter-item">
+    <span>Fire</span>
+    <input type="checkbox" checked onchange="toggleType('Fire', this.checked)">
+  </label>
+
+  <label class="filter-item">
+    <span>Traffic</span>
+    <input type="checkbox" checked onchange="toggleType('Traffic', this.checked)">
+  </label>
+
+  <label class="filter-item">
+    <span>Roadwork</span>
+    <input type="checkbox" checked onchange="toggleType('Roadwork', this.checked)">
+  </label>
+
+  <!-- DRRM TYPES -->
+
+  <label class="filter-item drrm-only">
+    <span>Evacuation Center</span>
+    <input type="checkbox" checked onchange="toggleType('Evacuation', this.checked)">
+  </label>
+
+  <label class="filter-item drrm-only">
+    <span>Not Passable</span>
+    <input type="checkbox" checked onchange="toggleType('NotPassable', this.checked)">
+  </label>
+
+</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+  <a href="index.html">
+    <button>
+      <span class="material-symbols-rounded">location_on</span>
+      <small>Map</small>
+    </button>
+  </a>
+
+  <a href="feed.html">
+    <button>
+      <span class="material-symbols-rounded">dynamic_feed</span>
+      <small>Feed</small>
+    </button>
+  </a>
+
+  <a href="more.html">
+    <button>
+      <span class="material-symbols-rounded">more_horiz</span>
+      <small>Menu</small>
+    </button>
+  </a>
+</nav>
+
+
+</div>
+<!-- REPORT MODAL -->
+<div id="reportModal" class="modal hidden">
+  <div class="modal-box">
+    <h3>Report Incident</h3>
+
+    <select id="incidentType">
+  <option value="Roadwork">🚧 Road Work</option>
+  <option value="Traffic">🚦 Traffic</option>
+  <option value="Flood">🌊 Flood</option>
+  <option value="Crash">🚗 Crash</option>
+  <option value="Fire">🔥 Fire</option>
+
+  <!-- Calamities -->
+  <option value="Earthquake">🌏 Earthquake</option>
+  <option value="Typhoon">🌀 Typhoon</option>
+  <option value="Landslide">🪨 Landslide</option>
+  <option value="Others">⚠️ Others</option>
+</select>
+
+
+
+    <textarea id="incidentNote" placeholder="Describe what happened (optional)"></textarea>
+
+    <button onclick="submitReport()">Submit Report</button>
+    <button class="secondary" onclick="closeReport()">Cancel</button>
+  </div>
+</div>
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao&libraries=places,geometry&callback=initMap"
+  async defer>
+</script>
+  
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

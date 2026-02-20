@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>TANAW Feed</title>
+  
+<link rel="manifest" href="manifest.json">
+
+<link rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" />
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="feed-app">
+
+  <header class="feed-header">
+  <h2>Live Feed</h2>
+
+  <div class="notif-bell" id="openNotif">
+  <span class="material-symbols-rounded">notifications</span>
+  <span class="notif-badge" id="notifCount">0</span>
+</div>
+</header>
+
+<!-- LIVE AREA HERO -->
+<div class="feed-hero hidden" id="liveHero">
+  <img id="liveMedia" src="" />
+  <div class="feed-hero-text">
+    <h3 id="liveTitle"></h3>
+    <small id="liveSub"></small>
+  </div>
+</div>
+
+
+<div class="area-list">
+  <h4>Areas</h4>
+
+<div class="area-item" onclick="openLiveArea('Almeda Highway')">
+  Almeda Highway
+</div>
+<div class="area-item" onclick="openLiveArea('Maharlika Highway')">
+  Maharlika Highway
+</div>
+<div class="area-item" onclick="openLiveArea('Diversion Road')">
+  Diversion Road
+</div>
+<div class="area-item" onclick="openLiveArea('Magsaysay Ave')">
+  Magsaysay Ave
+</div>
+<div class="area-item" onclick="openLiveArea('Peñafrancia Ave')">
+  Peñafrancia Ave
+</div>
+  
+</div>
+
+  <!-- NOTIFICATION PANEL -->
+<div class="notif-panel hidden" id="notifPanel">
+  <header class="notif-header">
+    <button id="notifBack">
+      <span class="material-symbols-rounded">arrow_back</span>
+    </button>
+    <h3>Notifications</h3>
+  </header>
+
+  <div class="feed-list" id="feedList"></div>
+</div>
+
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <a href="index.html">
+      <button>
+        <span class="material-symbols-rounded">location_on</span>
+        <small>Map</small>
+      </button>
+    </a>
+
+    <a href="feed.html">
+      <button class="active">
+        <span class="material-symbols-rounded">dynamic_feed</span>
+        <small>Feed</small>
+      </button>
+    </a>
+
+    <a href="more.html">
+      <button>
+        <span class="material-symbols-rounded">more_horiz</span>
+        <small>More</small>
+      </button>
+    </a>
+  </nav>
+
+</div>
+
+<script src="feed.js"></script>
+</body>
+</html>

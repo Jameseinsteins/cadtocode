@@ -1,0 +1,813 @@
+:root {
+  --primary:#ef5a3c;
+  --purple:#6a5acd;
+}
+
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  font-family:system-ui;
+  background:#000;
+  display:flex;
+  justify-content:center;
+}
+
+.app {
+  width:100%;
+  max-width:430px;
+  height:100vh;
+  position:relative;
+  background:#fff;
+  overflow:hidden;
+}
+
+/* MAP */
+#map {
+  position:absolute;
+  inset:0;
+  background:#f2f2f2;
+}
+
+/* SEARCH BAR */
+.search-bar {
+  position:absolute;
+  top:16px;
+  left:16px;
+  right:16px;
+  background:#fff;
+  border-radius:24px;
+  padding:10px 14px;
+  display:flex;
+  gap:8px;
+  box-shadow:0 6px 20px rgba(0,0,0,.15);
+  z-index:20;
+}
+
+.search-bar input {
+  border:none;
+  outline:none;
+  flex:1;
+}
+
+/* FLOATING BUTTONS */
+.fab {
+  position:absolute;
+  right:16px;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  border:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 20px rgba(0,0,0,.3);
+  cursor:pointer;
+  transition:bottom .25s ease;
+  z-index:50;
+}
+
+.gps {
+  background:#fff;
+  color:var(--purple);
+  border:3px solid var(--purple);
+}
+
+.add {
+  background:var(--primary);
+  color:#fff;
+}
+
+/* FAB MENU */
+.fab-menu {
+  position:absolute;
+  right:50px;
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  display:none;
+  flex-direction:column;
+  z-index:49;
+}
+
+.fab-menu button {
+  padding:14px 18px;
+  border:none;
+  background:#fff;
+  text-align:left;
+}
+
+/* BOTTOM SHEET */
+.sheet {
+  position:absolute;
+  bottom:72px;
+  width:100%;
+  background:#fff;
+  border-radius:20px 20px 0 0;
+  transition:height .25s ease;
+  overflow:hidden;
+  z-index:30;
+}
+
+.sheet.collapsed { height:92px; }
+.sheet.expanded {
+  height: 80vh;
+}
+
+
+.handle {
+  width:40px;
+  height:4px;
+  background:#ccc;
+  border-radius:2px;
+  margin:8px auto;
+  cursor:pointer;
+}
+
+.sheet-tabs {
+  display:flex;
+  justify-content:center;
+  gap:12px;
+}
+
+.pill {
+  padding:10px 26px;
+  border-radius:24px;
+  border:1px solid #ddd;
+  background:#fff;
+}
+
+.pill.active { background:#f2f2f2; }
+
+.sheet-body {
+  padding:0 24px;
+  text-align:center;
+}
+
+.sheet-section { display:none; }
+.sheet-section.active { display:block; }
+
+.trip-info {
+  font-size:14px;
+  color:#555;
+  margin:12px 0 18px;
+}
+
+.create-trip-btn {
+  padding:12px 28px;
+  border-radius:24px;
+  border:1px solid #ccc;
+  background:#fff;
+  cursor:pointer;
+}
+
+/* CREATE TRIP FORM */
+.location-row {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.location-row input {
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
+
+.dot {
+  width:14px;
+  height:14px;
+  border-radius:50%;
+}
+.dot.start { background:#ffcc00; }
+.dot.end { background:#3fc1c9; }
+
+.save-trip-btn {
+  width:100%;
+  padding:12px;
+  border-radius:24px;
+  border:none;
+  background:#ccc;
+}
+
+/* INCIDENTS */
+.incident-search-row {
+  display:flex;
+  gap:12px;
+  margin-top:12px;
+}
+
+.incident-search-row input {
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
+
+.filter-btn {
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  border:none;
+  background:var(--purple);
+  color:#fff;
+}
+
+.filter-panel {
+  position: relative;
+  width: 100%;
+  margin-top: 12px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  padding: 14px;
+  display: none;
+}
+
+
+.filter-item {
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+}
+
+
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:72px;
+  background:var(--primary);
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+}
+
+.bottom-nav button {
+  background:none;
+  border:none;
+  color:#fff;
+  opacity:.75;
+}
+.bottom-nav button.active { opacity:1; }
+
+/* DRRM TOGGLE */
+.drrm-toggle {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 16px;
+  margin-top:12px;
+  background:#f9f9f9;
+  border-radius:14px;
+  font-size:14px;
+}
+
+/* SWITCH */
+.switch {
+  position:relative;
+  width:44px;
+  height:24px;
+}
+
+.switch input { display:none; }
+
+.slider {
+  position:absolute;
+  inset:0;
+  background:#ccc;
+  border-radius:24px;
+  cursor:pointer;
+}
+
+.slider::before {
+  content:"";
+  position:absolute;
+  width:18px;
+  height:18px;
+  left:3px;
+  top:3px;
+  background:#fff;
+  border-radius:50%;
+  transition:.2s;
+}
+
+input:checked + .slider {
+  background:#d32f2f;
+}
+
+input:checked + .slider::before {
+  transform:translateX(20px);
+}
+
+/* ================================
+   DRRM ALERT POPUP
+================================ */
+.alert-popup {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  width: calc(100% - 40px);
+  max-width: 380px;
+
+  background: #d32f2f;
+  color: #fff;
+  padding: 16px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 9999;
+
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.alert-popup.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.alert-popup strong {
+  font-size: 16px;
+}
+
+.alert-popup p {
+  margin: 6px 0 0;
+  font-size: 14px;
+}
+
+/* MAP DRRM MODE */
+#map.drrm-active {
+  background: linear-gradient(#b3e5fc, #e3f2fd);
+}
+
+/* ===============================
+   DRRM TOGGLE (TOP-LEFT)
+=============================== */
+
+.drrm-top {
+  position: fixed;
+  top: 70px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  z-index: 1002;
+  font-size: 13px;
+}
+
+.drrm-top span {
+  font-weight: 600;
+}
+
+/* FEED UI */
+
+.feed-app {
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  background: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+}
+
+.feed-header {
+  padding: 16px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feed-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.feed-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 90px;
+}
+
+.feed-empty {
+  text-align: center;
+  color: #777;
+  margin-top: 40px;
+}
+
+.feed-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin: 12px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+}
+
+.feed-icon {
+  font-size: 28px;
+  width: 40px;
+  text-align: center;
+}
+
+.feed-info h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.feed-info p {
+  margin: 2px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.feed-info small {
+  font-size: 12px;
+  color: #999;
+}
+
+/* ===============================
+   MORE / MENU UI (FIXED)
+=============================== */
+
+.more-app {
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  background: #f7f7f7;
+  padding: 16px;
+  padding-bottom: 90px;
+}
+
+.more-app h2 {
+  margin: 8px 0 16px;
+  font-size: 20px;
+}
+
+.menu-item {
+  width: 100%;
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+  cursor: pointer;
+}
+
+.menu-item span {
+  font-size: 24px;
+  color: var(--primary);
+}
+
+.menu-item:active {
+  transform: scale(.98);
+}
+
+
+
+.feed-app,
+.more-app {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  width: 90%;
+  max-width: 320px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.2);
+}
+
+.modal-box h3 {
+  margin-top: 0;
+}
+
+.modal-box select,
+.modal-box textarea,
+.modal-box button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+}
+
+.modal-box textarea {
+  resize: none;
+  height: 80px;
+}
+
+.modal-box button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+}
+
+.modal-box .secondary {
+  background: #eee;
+  color: #333;
+}
+
+.feed-card {
+  border-left: 6px solid var(--type-color);
+}
+
+/* ===============================
+   SHEET + FAB MERGED STATE
+=============================== */
+
+.sheet {
+  height: 92px;
+  transition: height 0.25s ease;
+}
+
+.app.sheet-up .sheet {
+  height: 70vh;
+}
+
+/* FAB follow sheet */
+.fab {
+  transition: bottom 0.25s ease;
+}
+
+.fab.gps {
+  bottom: 230px;
+}
+
+.fab.add {
+  bottom: 160px;
+}
+
+.app.sheet-up .fab.gps {
+  bottom: 425px;
+}
+
+.app.sheet-up .fab.add {
+  bottom: 355px;
+}
+
+.filter-panel.open {
+  display: block;
+}
+
+.fab-menu.open {
+  display: flex;
+}
+
+.fab-menu {
+  bottom: 160px;
+}
+
+/* ===============================
+   DRRM TOGGLE ANIMATION
+=============================== */
+
+.drrm-top {
+  animation: drrmEnter 0.45s ease-out;
+  transform-origin: top left;
+}
+
+/* Entrance animation */
+@keyframes drrmEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.95);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(4px) scale(1.02);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Pulse when DRRM is active */
+.drrm-top.active {
+  animation: drrmPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes drrmPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255,0,0,.35); }
+  70%  { box-shadow: 0 0 0 10px rgba(255,0,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,0,0,0); }
+}
+/* ===============================
+   SHEET SWIPE SUPPORT
+=============================== */
+
+.sheet {
+  touch-action: pan-y;
+}
+.sheet-body {
+  overscroll-behavior: contain;
+}
+
+.notif-bell {
+  position: relative;
+  cursor: pointer;
+}
+
+.notif-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: red;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 12px;
+  display: none;
+}
+.feed-hero {
+  margin: 12px;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+
+.feed-hero img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.feed-hero-text {
+  padding: 12px;
+}
+
+.feed-hero-text h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.feed-hero-text small {
+  color: #777;
+}
+
+.area-list {
+  background: #fff;
+  margin: 12px;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+}
+
+.area-list h4 {
+  margin: 0 0 8px;
+}
+
+.area-item {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.area-item:last-child {
+  border-bottom: none;
+}
+
+/* NOTIFICATION PANEL */
+.notif-panel {
+  position: absolute;
+  inset: 0;
+  background: #f7f7f7;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+}
+
+.notif-panel.hidden {
+  display: none;
+}
+
+.notif-header {
+  background: #fff;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.notif-header h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.notif-header button {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+
+.feed-hero.hidden {
+  display: none;
+}
+
+.area-item.active {
+  background: #f2f2f2;
+  font-weight: 600;
+}
+
+.hidden {
+  display: none;
+}
+
+/* FEED SCROLL FIX */
+.feed-app {
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  background: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;        /* ✅ scrolling happens here */
+  -webkit-overflow-scrolling: touch;
+}
+
+
+.feed-hero {
+  flex-shrink: 0;
+}
+
+.area-list {
+  flex-shrink: 0;
+}
+
+/* Pulsing evacuation marker */
+.pulse-evac {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background: #ff5722;
+  border-radius: 50%;
+  box-shadow: 0 0 0 rgba(255,87,34, 0.7);
+  animation: pulseEvac 1.8s infinite;
+}
+
+.pulse-evac::after {
+  content: "🏠";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+}
+
+@keyframes pulseEvac {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255,87,34, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(255,87,34, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255,87,34, 0);
+  }
+}
